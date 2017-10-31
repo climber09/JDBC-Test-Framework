@@ -61,4 +61,4 @@ Also note that since most of the typical database access code relies on a Result
 
 The one known limitation is the inability to create a proxy object which needs to be cast to a concrete type. The Java proxy mechanism can only create a proxy objects from interfaces. JDBC code should be written to interfaces, anyway. This should be adopted in most cases, as a rule, as part of <em>best practices</em> for Java coding in general.
 
-Copyright &copy; 2017 James P Hunter
+<span style="font-size: 0.85em;">Copyright &copy; 2017 James P Hunter</span>
