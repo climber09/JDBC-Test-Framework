@@ -1,10 +1,11 @@
 ----------------
 ## JDBC Test Framework
 
+* Mock Object Testing
+* Pure Java
 * Lightweight
-* Portable
+* Transparent
 * Extendable
-* Transparent to production code
 
 I designed the <em>JDBC Test Framework</em> for JUnit-style testing of JDBC code with mock objects. It allows your JDBC production code to be tested with mocked-up data. Mock objects are injected into the test execution at runtime to intercept calls to the database driver. The test writer is thus able to control the input of data, which would normally come from the database.
 
