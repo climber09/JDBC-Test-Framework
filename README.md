@@ -53,7 +53,7 @@ So, what this example shows is that there are two types of objects that the test
 
 The second object is the <em>TestAction</em> type, shown above as an anonymous class. <em>TestAction</em> is the base class to extend in order to implement the test code which will be run within <em>MockDriver</em>.
 
-So as long as your Java code can be run from within a <em>TestAction</em>, then, your JDBC code can be run with the <em>MockDriver</em> container. And the mock <em>ResultSet</em> object(s) that you provide will be substituted for the real <em>java.sql.ResultSet</em> which would normally provide data from the database.
+So as long as your JDBC code can be run from within a <em>TestAction</em>, then, that code can also be run within the <em>MockDriver</em> container. And the mock <em>ResultSet</em> object(s) that you provide will be substituted for the real <em>java.sql.ResultSet</em> which would normally provide data from the database.
 
 Note that this approach is not intended to replace end-to-end testing or functional testing with an actual RDBMS.
 
