@@ -55,9 +55,9 @@ import org.apache.commons.logging.LogFactory;
  *         }
  *     });
  *     MockDriver driver = new MockDriver(mockResultSet);
- *     driver.setupProxyDriver();
+ *     driver.setupConnectionSource();
  *     driver.execute(testAction);
- *     driver.resetJdbcDrivers();
+ *     driver.restoreConnectionSource();
  * </pre>
  * <p>
  * Since most of the typical database access code relies on a <code>ResultSet</code>
@@ -225,9 +225,9 @@ public class MockDriver {
      * the proxy JDBC driver will be invoked, instead of any other drivers
      * registered with the <code>DriverManager</code>.
      *
-     * @throws SQLException
+     * @throws Exception
      */
-    public void setupProxyDriver() throws SQLException {
+    public void setupConnectionSource() throws Exception {
         this.jdbcDrivers = Collections.list(DriverManager.getDrivers());
         for (Driver driver : jdbcDrivers) {
             DriverManager.deregisterDriver(driver);
@@ -240,9 +240,9 @@ public class MockDriver {
      * the original JDBC drivers with the <code>DriverManager</code>. It's up to
      * the test writer to know when the original drivers need to be restored.
      *
-     * @throws SQLException
+     * @throws Exception
      */
-    public void resetJdbcDrivers() throws SQLException {
+    public void restoreConnectionSource() throws Exception {
         DriverManager.deregisterDriver(this.proxyDriver);
         for (Driver driver : this.jdbcDrivers) {
             DriverManager.registerDriver(driver);
@@ -335,8 +335,8 @@ public class MockDriver {
 
     /**
      * Called to execute a particular test action within the mock driver
-     * container. {@link #setupProxyDriver} must be called prior to this method.
-     * {@link #resetJdbcDrivers} must be called before exiting the test case, or
+     * container. {@link #setupConnectionSource} must be called prior to this method.
+     * {@link #restoreConnectionSource} must be called before exiting the test case, or
      * before executing another test which depends on the actual system JDBC
      * drivers.
      *
@@ -381,15 +381,19 @@ public class MockDriver {
 
         // First thing, unregister the current JDBC drivers so
         // they won't be invoked.
-        mockDriver.setupProxyDriver();
+        mockDriver.setupConnectionSource();
 
         mockDriver.execute(testAction);
 
         // Now it's important to clean up and re-register the saved
         // JDBC drivers.
-        mockDriver.resetJdbcDrivers();
+        mockDriver.restoreConnectionSource();
     }
 
+    /**
+     * 
+     * @return com.hunterjdev.mockjdbc.MockDriver.MockObjectHandler.class type.
+     */
     public static Class<MockObjectHandler> getMockObjectHandler() {
         return MockObjectHandler.class;
     }
