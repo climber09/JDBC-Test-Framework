@@ -221,10 +221,14 @@ public class MockDriver {
     }
 
     /**
-     * This method must be called prior to {@link #execute(TestAction)}, so that
-     * the proxy JDBC driver will be invoked, instead of any other drivers
+     * <p>This method must be called prior to {@link #execute(TestAction)}, so
+     * that the proxy JDBC driver will be invoked, instead of any other drivers
      * registered with the <code>DriverManager</code>.
-     *
+     * </p>
+     * <p>This method can be overridden for cases where the <code>Connection</code>
+     * is obtained from some source other than the <code>DriverManager</code>.
+     * </p>
+     * 
      * @throws Exception
      */
     public void setupConnectionSource() throws Exception {
@@ -236,9 +240,13 @@ public class MockDriver {
     }
 
     /**
-     * This method must be invoked after the test action, in order to re-register
+     * <p>This method must be invoked after the test action, in order to re-register
      * the original JDBC drivers with the <code>DriverManager</code>. It's up to
-     * the test writer to know when the original drivers need to be restored.
+     * the test writer to know when the original drivers need to be restored. 
+     * </p>
+     * <p>This method can be overridden for cases where the <code>Connection</code>
+     * is obtained from some source other than the <code>DriverManager</code>.
+     * </p>
      *
      * @throws Exception
      */
