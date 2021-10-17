@@ -1,5 +1,5 @@
 ----------------
-## JDBC Test Framework
+# JDBC Test Framework
 
 * Mock Object Testing
 * Pure Java
@@ -13,7 +13,7 @@ It is intended for those testing scenarios where it is difficult to separate the
 
 The mock objects are instances of <em>java.lang.reflect.Proxy</em>. They are substituted in place of the typical JDBC objects from the <em>java.sql</em> package, namely, <em>Driver</em>, <em>Connection</em>, <em>Statement</em> and its sub-classes, and <em>ResultSet</em>. The object substitution is completely transparent. There is no modification of production code. As long as your JDBC code can be called from within a test object, it can be tested with mock objects.
 
-#### Example
+### Example
 Here is a simple JUnit-style test example:
 ```java
    public class MyMockResultSet{
@@ -64,4 +64,5 @@ While <em>MockDriver</em> was originally developed to test code which used the <
 
 The one known limitation is the inability to create a proxy object which needs to be cast to a concrete type. The Java proxy mechanism can only create proxy objects from interfaces. JDBC code should be written to interfaces, anyway. This should be adopted in most cases, as a rule, as part of <em>best practices</em> for Java coding in general.
 
-<span style="font-size: 0.85em;">Copyright &copy; 2017 James P Hunter</span>
+---
+<sub>Copyright &copy; 2017 James P Hunter</sub>
